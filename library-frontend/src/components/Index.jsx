@@ -7,7 +7,7 @@ const Index = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(setPage('index'))
-  }, [])
+  }, [dispatch])
 
   return (
     <>

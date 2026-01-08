@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 const Notification = ({ error }) => {
   return (
     <div style={{ color: 'red' }}>{error}</div>

@@ -12,7 +12,7 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { createClient } from 'graphql-ws/client'
 
-const authLink = new SetContextLink(({ headers }, forward) => {
+const authLink = new SetContextLink(({ headers }) => {
   let token = null
   const itemInLocalStorage = JSON.parse(localStorage.getItem("loggedinUser"))
   if (itemInLocalStorage) {

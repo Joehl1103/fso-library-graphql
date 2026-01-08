@@ -12,14 +12,19 @@ const Authors = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(setPage('authors'))
-  })
+  }, [dispatch])
+
+  useEffect(() => {
+    if (error) {
+      dispatch(setErrorAndTimeout(error))
+    }
+  }, [dispatch, error])
 
   if (loading) {
     return <div>Loading...</div>
   }
 
   if (error) {
-    dispatch(setErrorAndTimeout(authorResult.error))
     return <div>...Error...</div>
   }
 

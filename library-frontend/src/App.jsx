@@ -13,23 +13,7 @@ import { setToken } from './reducers/tokenSlice.js'
 import Notification from "./components/Notification.jsx";
 import { setMe } from "./reducers/meSlice.js";
 import { ME, BOOK_ADDED, GET_ALL_BOOKS } from "./queries.js";
-
-export const updateCache = (cache, query, addedBook) => {
-  const uniqByName = (a) => {
-    let seen = new Set()
-    return a.filter((item) => {
-      let k = item.name
-      return seen.has(k) ? false : seen.add(k)
-    })
-  }
-  cache.updateQuery(query, ({ allBooks }) => {
-    return {
-      allBooks:
-        uniqByName(allBooks.concat(addedBook))
-    }
-  })
-}
-
+import { updateCache } from "./utils/updateCache.js";
 
 const App = () => {
   const token = useSelector(state => state.token)
@@ -37,7 +21,7 @@ const App = () => {
   const error = useSelector(state => state.error)
   const page = useSelector(state => state.page)
 
-  const result = useQuery(ME)
+  const { data: meData } = useQuery(ME)
 
   useSubscription(BOOK_ADDED, {
     onData: ({ data, client }) => {
@@ -53,12 +37,13 @@ const App = () => {
     if (loggedinUser) {
       dispatch(setToken(loggedinUser.token))
     }
-    if (result.data) {
-      const me = result.data.me
-      dispatch(setMe(me))
-    }
+  }, [dispatch])
 
-  }, [token, result])
+  useEffect(() => {
+    if (meData) {
+      dispatch(setMe(meData.me))
+    }
+  }, [dispatch, meData])
 
   const errorNotification = error ? <Notification error={error} /> : null
 

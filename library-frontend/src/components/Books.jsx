@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client/react'
 import { GET_ALL_BOOKS } from '../queries'
 import { useDispatch } from 'react-redux'
 import { setPage } from '../reducers/pageSlice'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import NewBook from './NewBook.jsx'
 
 const Books = () => {
@@ -25,7 +25,7 @@ const Books = () => {
       })
       setGenres(Array.from(genreSet))
     }
-  }, [data, loading])
+  }, [data, dispatch, loading])
 
   if (loading) {
     return <div>Loading...</div>
@@ -39,7 +39,7 @@ const Books = () => {
     } else {
       errorMessage = error.message
     }
-    return <div style={{ color: 'red' }}> Error... ${errorMessage}</div >
+    return <div style={{ color: 'red' }}> Error... {errorMessage}</div >
   }
 
   if (!data) {
