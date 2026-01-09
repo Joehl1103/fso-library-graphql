@@ -28,7 +28,7 @@ mongoose.connect(url)
     console.log(`Connected to mongoose`)
   })
   .catch((e) => {
-    console.warn(`unable to connect: ${error.message}`)
+    console.warn(`unable to connect: ${e.message}`)
   })
 
 // mongoose.set('debug', true)
@@ -80,9 +80,9 @@ const start = async () => {
     })
   )
 
-  const PORT = 4000
+  const PORT = Number(process.env.PORT) || 4000
 
-  httpServer.listen(PORT, () => console.log(`Server is now running on http://localhost: ${PORT}`))
+  httpServer.listen(PORT, () => console.log(`Server is now running on http://localhost:${PORT}`))
 
 }
 
