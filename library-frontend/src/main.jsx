@@ -12,6 +12,17 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { createClient } from 'graphql-ws/client'
 
+const DEFAULT_GRAPHQL_HTTP_URL = import.meta.env.DEV
+  ? 'http://localhost:4000'
+  : 'https://fso-library-graphql.onrender.com'
+
+const DEFAULT_GRAPHQL_WS_URL = import.meta.env.DEV
+  ? 'ws://localhost:4000'
+  : 'wss://fso-library-graphql.onrender.com'
+
+const GRAPHQL_HTTP_URL = import.meta.env.VITE_GRAPHQL_HTTP_URL || DEFAULT_GRAPHQL_HTTP_URL
+const GRAPHQL_WS_URL = import.meta.env.VITE_GRAPHQL_WS_URL || DEFAULT_GRAPHQL_WS_URL
+
 const authLink = new SetContextLink(({ headers }) => {
   let token = null
   const itemInLocalStorage = JSON.parse(localStorage.getItem("loggedinUser"))
@@ -26,11 +37,11 @@ const authLink = new SetContextLink(({ headers }) => {
 })
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000'
+  uri: GRAPHQL_HTTP_URL
 })
 
 const wsLink = new GraphQLWsLink(
-  createClient({ url: 'ws://localhost:4000' })
+  createClient({ url: GRAPHQL_WS_URL })
 )
 
 const splitLink = split(({ query }) => {
