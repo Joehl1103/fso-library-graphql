@@ -15,12 +15,14 @@ const BirthYearForm = () => {
   }
 
   const authors = authorResult.data.allAuthors
+  const defaultName = authors.length > 0 ? authors[0].name : ''
 
   async function handleBirthYearChange(event) {
     event.preventDefault()
     let result = undefined
     try {
-      result = await editBirthYear({ variables: { name: name, setBornTo: Number(year) } })
+      const selectedName = name || defaultName
+      result = await editBirthYear({ variables: { name: selectedName, setBornTo: Number(year) } })
     } catch (e) {
       console.warn(`Error: ${e.message}`)
     }
