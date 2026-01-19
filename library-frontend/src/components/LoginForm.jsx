@@ -22,7 +22,6 @@ const LoginForm = () => {
     let token = null
     if (result) {
       token = result.data.login.value
-
     }
     if (token) {
       const loggedInUser = { username: username, token: token }

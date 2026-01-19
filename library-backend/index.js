@@ -28,7 +28,7 @@ mongoose.connect(url)
     console.log(`Connected to mongoose`)
   })
   .catch((e) => {
-    console.warn(`unable to connect: ${e.message}`)
+    console.warn(`unable to connect to mongodb: ${e.message}`)
   })
 
 // mongoose.set('debug', true)
