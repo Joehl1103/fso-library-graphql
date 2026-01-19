@@ -237,19 +237,21 @@ const resolvers = {
         })
       }
 
-      // const authorExists = authors.some(a => a.name.trim().toLowerCase() === args.name.trim().toLowerCase())
       const author = await Author.exists({ name: args.name })
       if (!author) {
-        throw new GraphQLError('user does not exist', {
+        throw new GraphQLError('author does not exist', {
           extensions: {
             code: 'BAD_USER_INPUT',
             invalidArgs: args.name
           }
         })
       }
-      await Author.findOneAndUpdate({ name: args.name }, { born: args.setBornTo })
-      const newAuthor = await Author.findOne({ name: args.name })
-      console.assert(newAuthor.born === args.setBornTo, 'something went wrong with updating')
+      const updatedAuthor = await Author.findOneAndUpdate(
+        { name: args.name },
+        { born: args.setBornTo },
+        { new: true }
+      ).populate('books')
+      return updatedAuthor
     },
     createUser: async (root, args) => {
       const { username } = args
