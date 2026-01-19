@@ -45,6 +45,11 @@ const LoginForm = () => {
         </div>
         <button type="submit">login</button>
       </form>
+      <div style={{ border: '1px solid black', display: 'inline-block', padding: '2px 5px', marginTop: '10px' }}>
+        <h3>Demo credentials</h3>
+        <p style={{ marginBottom: '5px' }}>username: test username</p>
+        <p style={{ marginTop: '0' }}>password: secret</p>
+      </div>
     </div>
   )
 }
