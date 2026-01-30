@@ -11,7 +11,6 @@ export const errorSlice = createSlice({
 export const { setError } = errorSlice.actions
 
 export function setErrorAndTimeout(errorObject) {
-  console.log('returning setErrorAndTimeoutThunk', errorObject)
   return async function setErrorAndTimeoutThunk(dispatch) {
     dispatch(setError(errorObject.message))
     setTimeout(() => {
@@ -21,4 +20,3 @@ export function setErrorAndTimeout(errorObject) {
 }
 
 export default errorSlice.reducer
-

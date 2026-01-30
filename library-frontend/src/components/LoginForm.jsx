@@ -29,7 +29,6 @@ const LoginForm = () => {
       dispatch(setToken(token))
       return
     }
-    console.log(`Unable to login because of result or token value`)
   }
   return (
     <div>

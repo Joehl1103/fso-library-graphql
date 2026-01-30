@@ -35,7 +35,6 @@ const NewBook = () => {
       setGenres([])
       setGenre('')
     } catch (e) {
-      console.log('error while adding book', e)
       throw new Error('Error while adding book')
     }
   }

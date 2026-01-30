@@ -11,7 +11,6 @@ const Books = () => {
   const [genres, setGenres] = useState([])
   const dispatch = useDispatch()
   const { loading, error, data } = useQuery(GET_ALL_BOOKS)
-  console.log('data', data)
 
   useEffect(() => {
     dispatch(setPage('books'))
@@ -48,7 +47,6 @@ const Books = () => {
 
   let booksToDisplay = allBooks
   if (booksToDisplay.length === 0) {
-    console.log('booksToDisplay', booksToDisplay)
     return (
       <>
         <div>No books to display</div>
@@ -63,8 +61,6 @@ const Books = () => {
       <td>{a.published}</td>
     </tr>
   ))
-  console.log('booksToDisplay', booksToDisplay)
-
   const baseGenreArray = ['all']
   return (
     <div>

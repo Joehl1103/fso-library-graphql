@@ -17,7 +17,6 @@ async function checkForAuthorAndReturnAuthorId(authorName, newBookId) {
 
 async function addBookIdToAuthor(bookId, authorId) {
   const bookRes = await Author.findById({ _id: authorId })
-  console.log(bookRes)
 
   let bookArrayNotNull = bookRes.books.filter(i => i !== null)
   bookArrayNotNull.push(bookId)
@@ -26,4 +25,3 @@ async function addBookIdToAuthor(bookId, authorId) {
 }
 
 module.exports = { checkForAuthorAndReturnAuthorId, addBookIdToAuthor }
-

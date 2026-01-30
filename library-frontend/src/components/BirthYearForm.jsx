@@ -26,7 +26,6 @@ const BirthYearForm = () => {
     } catch (e) {
       console.warn(`Error: ${e.message}`)
     }
-    console.log(`successfully edited ${name}'s birth year`, result.data)
   }
 
   return (

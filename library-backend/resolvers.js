@@ -71,7 +71,6 @@ const resolvers = {
       try {
         authors = await Author.find({}).populate('books')
       } catch (e) {
-        console.log('e', e)
         throw new Error(`Error: ${e.message}`)
       }
       return authors
@@ -109,7 +108,6 @@ const resolvers = {
       genres: [String!]
       ):Book  */
     addBook: async (root, args, contextValue) => {
-      console.log('entering addBook')
       if (!contextValue.currentUser) {
         throw new GraphQLError('must be logged in', {
           extensions: {
@@ -147,14 +145,11 @@ const resolvers = {
       // TODO add checkForAuthorAndAct
       // TODO get the author id by checking and if necessary, creating
       const authorId = await checkForAuthorAndReturnAuthorId(author)
-      console.log('authorID', authorId)
-      console.log('book', book)
       book.author = authorId
       // modify the book object by adding the author id
       // create the book and get the book id
       const { _id } = await Book.create(book)
       const bookId = _id
-      console.log('bookRes', _id)
       // modify the author
       addBookIdToAuthor(bookId, authorId)
       await Author.findOneAndUpdate({ _id: _id }, {})
@@ -269,7 +264,6 @@ const resolvers = {
       return userObject
     },
     editUser: async (root, args, contextValue) => {
-      console.log('entering editUser')
       const userId = contextValue.currentUser._id
       const user = await User.findById(userId)
       if (!user) {
