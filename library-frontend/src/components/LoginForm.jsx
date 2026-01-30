@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
 
-  const [login] = useMutation(LOGIN, {
+  const [login, { loading }] = useMutation(LOGIN, {
     onError: (e) => {
       dispatch(setErrorAndTimeout(e))
     }
@@ -42,7 +42,9 @@ const LoginForm = () => {
           <label>password</label>
           <input value={password} onChange={({ target }) => setPassword(target.value)} />
         </div>
-        <button type="submit">login</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'logging in...' : 'login'}
+        </button>
       </form>
       <div style={{ border: '1px solid black', display: 'inline-block', padding: '2px 5px', marginTop: '10px' }}>
         <h3>Demo credentials</h3>
