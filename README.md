@@ -49,6 +49,10 @@ library-graphql/
 - Personalized book recommendations
 - Real-time updates when new books are added (subscriptions)
 
+## Testing
+
+This project currently relies on manual verification and GraphQL sandbox exploration rather than automated tests. The backend includes a simple `node --check` script for syntax validation, but no unit, integration, or UI test suites are configured yet.
+
 ## GraphQL Schema
 
 ### Queries
